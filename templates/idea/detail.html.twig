@@ -1,0 +1,11 @@
+{% extends 'layout.html.twig' %}
+
+{% block main %}
+
+    <h1>{{ idea.title }}</h1>
+    <div class="idea-meta">By {{ idea.author }} ({{ idea.dateCreated|date("Y-m-d H:i") }})</div>
+    <div class="description">{{ idea.description|nl2br }}</div>
+
+{% endblock %}
+
+{% block title %}{{ idea.title }} | {{ parent() }}{% endblock %}
