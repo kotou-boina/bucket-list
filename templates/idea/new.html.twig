@@ -17,6 +17,11 @@
             {{ form_widget(form.author, {attr: {class: 'u-full-width'}}) }}
             {{ form_errors(form.author) }}
         </div>
+        <div class="mb-4">
+            {{ form_label(form.category) }}
+            {{ form_widget(form.category, {attr: {class: 'u-full-width'}}) }}
+            {{ form_errors(form.category) }}
+        </div>
         <button class="button" type="submit">Valider</button>
     {{ form_end(form) }}
 {% endblock %}

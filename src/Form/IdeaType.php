@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Category;
 use App\Entity\Idea;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -14,7 +16,11 @@ class IdeaType extends AbstractType
         $builder
             ->add('title')
             ->add('description')
-            ->add('author');
+            ->add('author')
+            ->add('category', EntityType::class, [
+                'class' => Category::class,
+                'choice_label' => 'name'
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

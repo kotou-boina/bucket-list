@@ -16,6 +16,7 @@ class IdeaController extends AbstractController
     #[Route("/ideas", name: "idea_list")]
     public function list(EntityManagerInterface $em)
     {
+        /** @var \App\Repository\IdeaRepository $repo */
         $repo = $em->getRepository(Idea::class);
         $ideas = $repo->findBy(["isPublished" => true], ["dateCreated" => "DESC"]);
 

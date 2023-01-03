@@ -2,56 +2,56 @@
 
 namespace App\Entity;
 
+use App\Repository\IdeaRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\IdeaRepository")
- */
+#[ORM\Entity(repositoryClass: IdeaRepository::class)]
 class Idea
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: "integer")]
     private $id;
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=250)
      */
+    #[ORM\Column(type: "string", length: 250)]
     #[Assert\NotBlank(message: 'Précisez le titre')]
     #[Assert\Length(max: 250, maxMessage: 'Le titre est trop long, taille max: 250')]
     private $title;
 
     /**
      * @var string
-     * @ORM\Column(type="text")
      */
+    #[ORM\Column(type: "text")]
     private $description;
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=50)
      */
+    #[ORM\Column(type: "string", length: 50)]
     #[Assert\NotBlank(message: 'Précisez l\'auteur')]
     #[Assert\Length(max: 50, maxMessage: 'Le titre est trop long, taille max: 250')]
     private $author;
 
     /**
      * @var boolean
-     * @ORM\Column(type="boolean")
      */
+    #[ORM\Column(type: "boolean")]
     private $isPublished;
 
     /**
      * @var \DateTime
-     * @ORM\Column(type="datetime")
      */
+    #[ORM\Column(type: "datetime")]
     private $dateCreated;
 
-    /**
+    #[ORM\ManyToOne(inversedBy: 'ideas')]
+    private ?Category $category = null;
+
+    /* *
      * @return mixed
      */
     public function getId()
@@ -73,6 +73,8 @@ class Idea
     public function setTitle(string $title)
     {
         $this->title = $title;
+
+        return $this;
     }
 
     /**
@@ -89,6 +91,8 @@ class Idea
     public function setDescription(string $description)
     {
         $this->description = $description;
+
+        return $this;
     }
 
     /**
@@ -105,6 +109,8 @@ class Idea
     public function setAuthor(string $author)
     {
         $this->author = $author;
+
+        return $this;
     }
 
     /**
@@ -121,6 +127,8 @@ class Idea
     public function setIsPublished(bool $isPublished)
     {
         $this->isPublished = $isPublished;
+
+        return $this;
     }
 
     /**
@@ -137,5 +145,19 @@ class Idea
     public function setDateCreated(\DateTime $dateCreated)
     {
         $this->dateCreated = $dateCreated;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
+
+        return $this;
     }
 }
