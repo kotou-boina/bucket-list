@@ -3,17 +3,19 @@
 {% block main %}
 
     <h1>Latest ideas</h1>
-    <div class="ideas-list">
-
-    {% for idea in ideas %}
-
-        <a href="{{ path('idea_detail', {'id': idea.id}) }}" title="More details on {{ idea.title }}">
-            {{ idea.title }}
-        </a>
-
-    {% endfor %}
-
-    </div>
+    <table class="u-full-width">
+        <tbody>
+            {% for idea in ideas %}
+                <tr>
+                    <td>
+                        <a href="{{ path('idea_detail', {'id': idea.id}) }}" title="More details on {{ idea.title }}">
+                            {{ idea.title }}
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
 {% endblock %}
 

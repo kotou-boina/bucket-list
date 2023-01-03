@@ -1,0 +1,22 @@
+{% extends "layout.html.twig" %}
+
+{% block main %}
+    {{ form_start(form) }}
+        <div class="mb-4">
+            {{ form_label(form.title) }}
+            {{ form_widget(form.title, {attr: {class: 'u-full-width'}}) }}
+            {{ form_errors(form.title) }}
+        </div>
+        <div class="mb-4">
+            {{ form_label(form.description) }}
+            {{ form_widget(form.description, {attr: {class: 'u-full-width'}}) }}
+            {{ form_errors(form.description) }}
+        </div>
+        <div class="mb-4">
+            {{ form_label(form.author) }}
+            {{ form_widget(form.author, {attr: {class: 'u-full-width'}}) }}
+            {{ form_errors(form.author) }}
+        </div>
+        <button class="button" type="submit">Valider</button>
+    {{ form_end(form) }}
+{% endblock %}

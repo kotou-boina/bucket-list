@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\IdeaRepository")
@@ -20,6 +21,8 @@ class Idea
      * @var string
      * @ORM\Column(type="string", length=250)
      */
+    #[Assert\NotBlank(message: 'Précisez le titre')]
+    #[Assert\Length(max: 250, maxMessage: 'Le titre est trop long, taille max: 250')]
     private $title;
 
     /**
@@ -32,6 +35,8 @@ class Idea
      * @var string
      * @ORM\Column(type="string", length=50)
      */
+    #[Assert\NotBlank(message: 'Précisez l\'auteur')]
+    #[Assert\Length(max: 50, maxMessage: 'Le titre est trop long, taille max: 250')]
     private $author;
 
     /**
