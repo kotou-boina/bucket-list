@@ -19,14 +19,29 @@
                 <a class="site-title" href="{{ path('home') }}" title="Bucket-List | Home">
                     <img src="{{ asset('img/logo.png') }}" alt="Bucket-List"> Bucket-List
                 </a>
-                <nav>
-                    <ul>
-                        <li><a href="{{ path("home") }}" title="Bucket-List | Home">Home</a></li>
-                        <li><a href="{{ path("idea_list") }}" title="Latest ideas">Latest ideas</a></li>
-                        <li><a href="{{ path("idea_new") }}" title="Latest ideas">New idea</a></li>
-                        <li><a href="{{ path("about_us") }}" title="Latest ideas">About us</a></li>
-                    </ul>
-                </nav>
+                <div class="d-flex justify-content-between align-items-center">
+                    <nav>
+                        <ul>
+                            <li><a href="{{ path("home") }}" title="Bucket-List | Home">Home</a></li>
+                            <li><a href="{{ path("idea_list") }}" title="Latest ideas">Latest ideas</a></li>
+                            {% if app.user %}
+                                <li><a href="{{ path("idea_new") }}" title="New idea">New idea</a></li>
+                            {% endif %}
+                            <li><a href="{{ path("about_us") }}" title="About us">About us</a></li>
+                        </ul>
+                    </nav>
+                    {% if app.user %}
+                        <a href="{{ path('app_logout') }}">Log out</a>
+                    {% else %}
+                        <nav>
+                            <ul>
+                                <li><a href="{{ path('app_login') }}">Log in</a></li>
+                                <li><a href="{{ path('app_register') }}">Register</a></li>
+                            </ul>
+                        </nav>
+                    {% endif %}
+                    
+                </div>
             </header>
         </div>
 

@@ -14,7 +14,7 @@
         </div>
         <div class="mb-4">
             {{ form_label(form.author) }}
-            {{ form_widget(form.author, {attr: {class: 'u-full-width'}}) }}
+            {{ form_widget(form.author, {attr: {class: 'u-full-width', value: app.user.pseudo ?? ''}}) }}
             {{ form_errors(form.author) }}
         </div>
         <div class="mb-4">
