@@ -1,0 +1,27 @@
+{% extends 'auth/layout.html.twig' %}
+
+{% block title %}Register - {{ parent() }} {% endblock %}
+
+{% block main %}
+<div class="login-container">
+    <div>
+        <h2 class="text-center">Register</h2>
+        <img class="logo" src="{{asset('img/logo.png')}}" alt="Logo">
+    </div>
+    {{ form_start(form) }}
+        {{ form_row(form.pseudo, {attr: {class: 'u-full-width'}}) }}
+        {{ form_row(form.email, {attr: {class: 'u-full-width'}}) }}
+        {{ form_row(form.plainPassword, {
+            label: 'Password',
+            attr: {class: 'u-full-width'}
+        }) }}
+        <label for="{{ form.agreeTerms.vars.id }}">
+            {{ form_widget(form.agreeTerms) }}
+            <span>Accept terms of use</span>
+        </label>
+
+        <span>Already have an account ? <a href="{{path('app_login')}}">Login</a></span>
+        <button type="submit" class="button u-pull-right">Register</button>
+    {{ form_end(form) }}
+</div>
+{% endblock %}

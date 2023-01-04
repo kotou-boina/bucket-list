@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Bucket-List{% endblock %}</title>
+    <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+    <link rel="icon" href="{{ asset('img/favicon.png') }}">
+    {% block css %}
+        <link rel="stylesheet" href="{{ asset('css/normalize.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/skeleton.css') }}">
+    {% endblock %}
+    <style>
+        .login-container {
+            height: 100vh;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: block;
+            height: auto;
+            width: 20%;
+            margin: 0 auto;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <main>
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ label }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+            {% block main %}{% endblock %}
+        </main>
+    </div>
+</body>
+</html>
