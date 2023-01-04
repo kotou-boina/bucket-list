@@ -7,6 +7,7 @@ use App\Form\IdeaType;
 use DateTime;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -18,12 +19,13 @@ class IdeaController extends AbstractController
     {
         /** @var \App\Repository\IdeaRepository $repo */
         $repo = $em->getRepository(Idea::class);
-        $ideas = $repo->findBy(["isPublished" => true], ["dateCreated" => "DESC"]);
+        $ideas = $repo->findPublishedWithCategory();
 
         return $this->render("idea/list.html.twig", ["ideas" => $ideas]);
     }
 
     #[Route('/ideas/new', name: 'idea_new')]
+    #[IsGranted('IS_AUTHENTICATED')]
     public function new(Request $request, EntityManagerInterface $em)
     {
         $idea = new Idea();

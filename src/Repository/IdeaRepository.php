@@ -13,6 +13,18 @@ class IdeaRepository extends ServiceEntityRepository
         parent::__construct($registry, Idea::class);
     }
 
+    public function findPublishedWithCategory()
+    {
+        return $this->createQueryBuilder('i')
+            ->select('i', 'c')
+            ->innerJoin('i.category', 'c')
+            ->andWhere('i.isPublished = :published')
+            ->setParameter('published', true)
+            ->orderBy('i.dateCreated', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
     /*
     public function findBySomething($value)
     {
