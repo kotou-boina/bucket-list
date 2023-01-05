@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Bucket-List{% endblock %}</title>
+    <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+    <link rel="icon" href="{{ asset('img/favicon.png') }}">
+    {% block css %}
+        <link rel="stylesheet" href="{{ asset('css/normalize.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/skeleton.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    {% endblock %}
+</head>
+<body>
+    <div class="container">
+        <main>
+            {% block body %}{% endblock %}
+        </main>
+
+        <footer>
+            © {{ "now"|date("Y") }} Bucket-List
+        </footer>
+    </div>
+</body>
+</html>
