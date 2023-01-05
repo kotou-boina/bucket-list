@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Idea;
 use App\Form\IdeaType;
+use App\Service\Censurator;
 use DateTime;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
@@ -26,7 +27,7 @@ class IdeaController extends AbstractController
 
     #[Route('/ideas/new', name: 'idea_new')]
     #[IsGranted('IS_AUTHENTICATED')]
-    public function new(Request $request, EntityManagerInterface $em)
+    public function new(Request $request, EntityManagerInterface $em, Censurator $censurator)
     {
         $idea = new Idea();
 
@@ -35,8 +36,9 @@ class IdeaController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $idea->setDateCreated(new DateTime());
-            $idea->setIsPublished(true);
+            $idea->setDateCreated(new DateTime())
+                ->setIsPublished(true)
+                ->setDescription($censurator->purify($idea->getDescription()));
 
             $em->persist($idea);
             $em->flush();
